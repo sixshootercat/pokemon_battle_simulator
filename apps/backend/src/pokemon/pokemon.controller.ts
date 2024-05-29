@@ -46,10 +46,10 @@ export class PokemonController {
 
   @Patch(':id')
   updatePokemon(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updatePokemonDto: UpdatePokemonDto,
   ) {
-    return this.pokemonService.updatePokemon(+id, updatePokemonDto);
+    return this.pokemonService.updatePokemon(id, updatePokemonDto);
   }
 
   @Delete(':id')

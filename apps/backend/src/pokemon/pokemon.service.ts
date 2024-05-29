@@ -1,14 +1,29 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PokemonService {
   constructor(private prisma: PrismaService) {}
 
-  createPokemon(_createPokemonDto: CreatePokemonDto) {
-    return 'This action adds a new pokemon';
+  async createPokemon(createPokemonDto: CreatePokemonDto) {
+    try {
+      return await this.prisma.pokemon.create({ data: createPokemonDto });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('A Pokemon with this name already exists');
+      }
+      throw error;
+    }
   }
 
   async getPokemonWeaknessAndResistance(id: number) {
@@ -26,7 +41,6 @@ export class PokemonService {
 
       return { weakAgainst, resistantAgainst };
     } catch (error) {
-      // handled by the getSinglePokemon method
       throw error;
     }
   }
@@ -64,7 +78,7 @@ export class PokemonService {
     return { successful: damage >= defender.hp };
   }
 
-  getAllPokemon() {
+  async getAllPokemon() {
     return this.prisma.pokemon.findMany();
   }
 
@@ -78,8 +92,21 @@ export class PokemonService {
     return pokemon;
   }
 
-  updatePokemon(id: number, _updatePokemonDto: UpdatePokemonDto) {
-    return `This action updates a #${id} pokemon`;
+  async updatePokemon(id: number, updatePokemonDto: UpdatePokemonDto) {
+    try {
+      return await this.prisma.pokemon.update({
+        data: updatePokemonDto,
+        where: { id },
+      });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('A Pokemon with this name already exists');
+      }
+      throw error;
+    }
   }
 
   removePokemon(id: number) {
