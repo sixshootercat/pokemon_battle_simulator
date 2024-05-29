@@ -32,4 +32,9 @@ $ yarn run test:cov
 
 ## Optimizations and other Considerations
 
-1. Deploy the thing
+1. Replace default Express server for Fastify for lower request latency
+2. Replace default tsc compiler for SWC to boost compilation times
+
+## Assumptions Made
+
+FILL IN
