@@ -14,13 +14,36 @@ datasource db {
 }
 
 model Pokemon {
-  id          Int      @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
+  type        PokemonType
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   hp          Int
   attack      Int
   name        String
-  type        String
   description String
-  image_url   String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  imageUrl    String      @map("image_url")
+  weakness    PokemonType
+  resistance  PokemonType
+}
+
+enum PokemonType {
+  NORMAL
+  FIRE
+  WATER
+  ELECTRIC
+  GRASS
+  ICE
+  FIGHTING
+  POISON
+  GROUND
+  FLYING
+  PSYCHIC
+  BUG
+  ROCK
+  GHOST
+  DRAGON
+  DARK
+  STEEL
+  FAIRY
 }
