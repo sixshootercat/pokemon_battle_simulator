@@ -22,9 +22,9 @@ model Pokemon {
   attack      Int
   name        String
   description String
-  imageUrl    String      @map("image_url")
+  imageUrl    String?      @map("image_url")
   weakness    PokemonType
-  resistance  PokemonType
+  resistance  PokemonType?
 }
 
 enum PokemonType {
