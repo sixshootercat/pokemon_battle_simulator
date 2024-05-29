@@ -10,6 +10,7 @@ export class PokemonService {
   createPokemon(_createPokemonDto: CreatePokemonDto) {
     return 'This action adds a new pokemon';
   }
+
   async getPokemonWeaknessAndResistance(id: number) {
     try {
       const pokemon = await this.getSinglePokemon(id);
@@ -30,6 +31,39 @@ export class PokemonService {
     }
   }
 
+  async canDefeatInSingleAttack(attackerId: number, defenderId: number) {
+    const [attacker, defender] = await Promise.all([
+      this.getSinglePokemon(attackerId),
+      this.getSinglePokemon(defenderId),
+    ]);
+
+    let damage = attacker.attack;
+
+    // Check attack effectiveness
+    const defenderEffectiveness =
+      await this.getPokemonWeaknessAndResistance(defenderId);
+
+    const isEffectiveAttack = !!defenderEffectiveness.weakAgainst.find(
+      (el) => el.type === attacker.type,
+    );
+
+    // If the attack is effective, we double the damage
+    if (isEffectiveAttack) {
+      damage *= 2;
+    }
+
+    const isResistantAttack = !!defenderEffectiveness.resistantAgainst.find(
+      (el) => el.type === attacker.type,
+    );
+
+    // If the attack is resistant, we reduce the damage by 20
+    if (isResistantAttack) {
+      damage -= 20;
+    }
+
+    return { successful: damage >= defender.hp };
+  }
+
   getAllPokemon() {
     return this.prisma.pokemon.findMany();
   }
@@ -40,6 +74,7 @@ export class PokemonService {
     if (!pokemon) {
       throw new NotFoundException(`Pokemon with ID ${id} not found`);
     }
+
     return pokemon;
   }
 

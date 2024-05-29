@@ -37,4 +37,8 @@ $ yarn run test:cov
 
 ## Assumptions Made
 
-FILL IN
+- entity assumptions
+- validation assumptions
+- domain rule assumptions
+- resistance and weakness assumptions
+- more?

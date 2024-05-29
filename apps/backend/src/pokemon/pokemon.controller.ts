@@ -20,6 +20,15 @@ export class PokemonController {
   createPokemon(@Body() createPokemonDto: CreatePokemonDto) {
     return this.pokemonService.createPokemon(createPokemonDto);
   }
+
+  @Get(':attackerId/attack/:defenderId')
+  async canDefeatInSingleAttack(
+    @Param('attackerId', ParseIntPipe) attackerId: number,
+    @Param('defenderId', ParseIntPipe) defenderId: number,
+  ) {
+    return this.pokemonService.canDefeatInSingleAttack(attackerId, defenderId);
+  }
+
   @Get('effectiveness/:id')
   getPokemonWeaknessAndResistance(@Param('id', ParseIntPipe) id: number) {
     return this.pokemonService.getPokemonWeaknessAndResistance(id);
