@@ -10,6 +10,25 @@ export class PokemonService {
   createPokemon(_createPokemonDto: CreatePokemonDto) {
     return 'This action adds a new pokemon';
   }
+  async getPokemonWeaknessAndResistance(id: number) {
+    try {
+      const pokemon = await this.getSinglePokemon(id);
+      const weakAgainst = await this.prisma.pokemon.findMany({
+        where: { type: pokemon.weakness },
+      });
+
+      const resistantAgainst = pokemon.resistance
+        ? await this.prisma.pokemon.findMany({
+            where: { type: pokemon.resistance },
+          })
+        : [];
+
+      return { weakAgainst, resistantAgainst };
+    } catch (error) {
+      // handled by the getSinglePokemon method
+      throw error;
+    }
+  }
 
   getAllPokemon() {
     return this.prisma.pokemon.findMany();

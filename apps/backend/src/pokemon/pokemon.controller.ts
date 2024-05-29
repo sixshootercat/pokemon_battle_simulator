@@ -20,6 +20,10 @@ export class PokemonController {
   createPokemon(@Body() createPokemonDto: CreatePokemonDto) {
     return this.pokemonService.createPokemon(createPokemonDto);
   }
+  @Get('effectiveness/:id')
+  getPokemonWeaknessAndResistance(@Param('id', ParseIntPipe) id: number) {
+    return this.pokemonService.getPokemonWeaknessAndResistance(id);
+  }
 
   @Get()
   getAllPokemon() {
