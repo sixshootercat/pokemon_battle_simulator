@@ -37,4 +37,12 @@ export class CreatePokemonDto
   @IsOptional()
   @IsEnum($Enums.PokemonType)
   resistance: $Enums.PokemonType;
+
+  @IsNotEmpty()
+  @IsEnum($Enums.Rarity)
+  rarity: $Enums.Rarity;
+
+  @IsNotEmpty()
+  @IsEnum($Enums.Expansion)
+  expansion: $Enums.Expansion;
 }
