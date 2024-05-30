@@ -1,0 +1,102 @@
+[
+  {
+    "type": "FIRE",
+    "hp": 100,
+    "attack": 50,
+    "name": "Charizard",
+    "description": "Charizard flies around the sky in search of powerful opponents.",
+    "imageUrl": "https://example.com/charizard.png",
+    "weakness": "WATER",
+    "resistance": "GRASS"
+  },
+  {
+    "type": "WATER",
+    "hp": 90,
+    "attack": 40,
+    "name": "Blastoise",
+    "description": "Blastoise has water spouts that protrude from its shell.",
+    "imageUrl": "https://example.com/blastoise.png",
+    "weakness": "ELECTRIC",
+    "resistance": "FIRE"
+  },
+  {
+    "type": "GRASS",
+    "hp": 80,
+    "attack": 60,
+    "name": "Venusaur",
+    "description": "There is a large flower on Venusaur's back.",
+    "imageUrl": "https://example.com/venusaur.png",
+    "weakness": "FIRE",
+    "resistance": "WATER"
+  },
+  {
+    "type": "ELECTRIC",
+    "hp": 70,
+    "attack": 70,
+    "name": "Pikachu",
+    "description": "Pikachu can generate powerful electricity.",
+    "imageUrl": "https://example.com/pikachu.png",
+    "weakness": "GROUND",
+    "resistance": "FLYING"
+  },
+  {
+    "type": "PSYCHIC",
+    "hp": 110,
+    "attack": 80,
+    "name": "Mewtwo",
+    "description": "Mewtwo is a Pokémon that was created by genetic manipulation.",
+    "imageUrl": "https://example.com/mewtwo.png",
+    "weakness": "BUG",
+    "resistance": "FIGHTING"
+  },
+  {
+    "type": "NORMAL",
+    "hp": 60,
+    "attack": 30,
+    "name": "Eevee",
+    "description": "Eevee has an unstable genetic makeup that suddenly mutates due to the environment in which it lives.",
+    "imageUrl": "https://example.com/eevee.png",
+    "weakness": "FIGHTING",
+    "resistance": "GHOST"
+  },
+  {
+    "type": "DRAGON",
+    "hp": 120,
+    "attack": 100,
+    "name": "Dragonite",
+    "description": "Dragonite is capable of circling the globe in just 16 hours.",
+    "imageUrl": "https://example.com/dragonite.png",
+    "weakness": "ICE",
+    "resistance": "FIRE"
+  },
+  {
+    "type": "BUG",
+    "hp": 50,
+    "attack": 20,
+    "name": "Butterfree",
+    "description": "Butterfree has a superior ability to search for delicious honey from flowers.",
+    "imageUrl": "https://example.com/butterfree.png",
+    "weakness": "FIRE",
+    "resistance": "GRASS"
+  },
+  {
+    "type": "ROCK",
+    "hp": 80,
+    "attack": 100,
+    "name": "Onix",
+    "description": "Onix has a magnet in its brain. It acts as a compass so that this Pokémon does not lose direction while it is tunneling.",
+    "imageUrl": "https://example.com/onix.png",
+    "weakness": "WATER",
+    "resistance": "NORMAL"
+  },
+  {
+    "type": "GHOST",
+    "hp": 60,
+    "attack": 60,
+    "name": "Gengar",
+    "description": "Gengar is said to emerge from darkness to steal the lives of those who become lost in mountains.",
+    "imageUrl": "https://example.com/gengar.png",
+    "weakness": "GHOST",
+    "resistance": "NORMAL"
+  }
+]
