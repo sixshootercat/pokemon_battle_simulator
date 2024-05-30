@@ -26,7 +26,7 @@ export class PokemonService {
     }
   }
 
-  async getPokemonWeaknessAndResistance(id: number) {
+  async getPokemonWeaknessAndResistance(id: string) {
     try {
       const pokemon = await this.getSinglePokemon(id);
       const weakAgainst = await this.prisma.pokemon.findMany({
@@ -45,7 +45,7 @@ export class PokemonService {
     }
   }
 
-  async canDefeatInSingleAttack(attackerId: number, defenderId: number) {
+  async canDefeatInSingleAttack(attackerId: string, defenderId: string) {
     const [attacker, defender] = await Promise.all([
       this.getSinglePokemon(attackerId),
       this.getSinglePokemon(defenderId),
@@ -82,7 +82,7 @@ export class PokemonService {
     return this.prisma.pokemon.findMany();
   }
 
-  async getSinglePokemon(id: number) {
+  async getSinglePokemon(id: string) {
     const pokemon = await this.prisma.pokemon.findUnique({ where: { id } });
 
     if (!pokemon) {
@@ -92,7 +92,7 @@ export class PokemonService {
     return pokemon;
   }
 
-  async updatePokemon(id: number, updatePokemonDto: UpdatePokemonDto) {
+  async updatePokemon(id: string, updatePokemonDto: UpdatePokemonDto) {
     try {
       return await this.prisma.pokemon.update({
         data: updatePokemonDto,

@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
@@ -23,14 +22,14 @@ export class PokemonController {
 
   @Get(':attackerId/attack/:defenderId')
   async canDefeatInSingleAttack(
-    @Param('attackerId', ParseIntPipe) attackerId: number,
-    @Param('defenderId', ParseIntPipe) defenderId: number,
+    @Param('attackerId') attackerId: string,
+    @Param('defenderId') defenderId: string,
   ) {
     return this.pokemonService.canDefeatInSingleAttack(attackerId, defenderId);
   }
 
   @Get('effectiveness/:id')
-  getPokemonWeaknessAndResistance(@Param('id', ParseIntPipe) id: number) {
+  getPokemonWeaknessAndResistance(@Param('id') id: string) {
     return this.pokemonService.getPokemonWeaknessAndResistance(id);
   }
 
@@ -40,13 +39,13 @@ export class PokemonController {
   }
 
   @Get(':id')
-  getSinglePokemon(@Param('id', ParseIntPipe) id: number) {
+  getSinglePokemon(@Param('id') id: string) {
     return this.pokemonService.getSinglePokemon(id);
   }
 
   @Patch(':id')
   updatePokemon(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,
     @Body() updatePokemonDto: UpdatePokemonDto,
   ) {
     return this.pokemonService.updatePokemon(id, updatePokemonDto);
