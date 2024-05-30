@@ -34,6 +34,8 @@ $ yarn run test:cov
 
 1. Replace default Express server for Fastify for lower request latency
 2. Replace default tsc compiler for SWC to boost compilation times
+3. Add DB level check constraints to attack and hp cols
+4. Add API swagger docs to all endpoint routes
 
 ## Assumptions Made
 
