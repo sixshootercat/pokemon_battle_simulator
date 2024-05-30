@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  HttpCode,
 } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
@@ -52,7 +53,8 @@ export class PokemonController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   removePokemon(@Param('id') id: string) {
-    return this.pokemonService.removePokemon(+id);
+    return this.pokemonService.removePokemon(id);
   }
 }

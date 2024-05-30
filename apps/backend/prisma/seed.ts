@@ -18,6 +18,7 @@ async function main() {
         type: p.type,
         hp: p.hp,
         attack: p.attack,
+        imageUrl: p.imageUrl,
         description: p.description,
         weakness: p.weakness,
         resistance: p.resistance,

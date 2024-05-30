@@ -109,7 +109,13 @@ export class PokemonService {
     }
   }
 
-  removePokemon(id: number) {
-    return `This action removes a #${id} pokemon`;
+  async removePokemon(id: string) {
+    try {
+      return await this.prisma.pokemon.delete({
+        where: { id },
+      });
+    } catch (error) {
+      throw new NotFoundException('Pokemon not found');
+    }
   }
 }
