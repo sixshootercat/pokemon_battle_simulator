@@ -10,7 +10,19 @@ export interface Pokemon {
   imageUrl: string | null;
   weakness: PokemonType;
   resistance: PokemonType | null;
+  rarity: Rarity;
+  expansion: Expansion;
 }
+
+export type Rarity = "COMMON" | "UNCOMMON" | "RARE";
+
+export type Expansion =
+  | "BASE"
+  | "JUNGLE"
+  | "FOSSIL"
+  | "TEAMROCKET"
+  | "GYMHEROES"
+  | "GYMCHALLENGE";
 
 export type PokemonType =
   | "NORMAL"
