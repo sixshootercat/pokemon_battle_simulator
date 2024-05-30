@@ -11,11 +11,33 @@ import {
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiConflictResponse,
+  ApiOkResponse,
+  ApiBody,
+} from '@nestjs/swagger';
+import {
+  CreatePokemonResponse,
+  CreatePokemonRequestBody,
+} from './pokemon.swagger';
 
+@ApiTags('pokemon')
 @Controller('pokemon')
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
+  @ApiOperation({ summary: 'Create a pokemon' })
+  @ApiResponse({ status: 201 })
+  @ApiConflictResponse({
+    description: 'A Pokemon with this name already exists',
+  })
+  @ApiOkResponse({
+    type: CreatePokemonResponse,
+  })
+  @ApiBody({ type: CreatePokemonRequestBody })
   @Post()
   createPokemon(@Body() createPokemonDto: CreatePokemonDto) {
     return this.pokemonService.createPokemon(createPokemonDto);
