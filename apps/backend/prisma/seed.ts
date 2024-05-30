@@ -22,6 +22,8 @@ async function main() {
         description: p.description,
         weakness: p.weakness,
         resistance: p.resistance,
+        rarity: p.rarity,
+        expansion: p.expansion,
       },
     });
   });

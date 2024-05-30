@@ -7,7 +7,9 @@
     "description": "Charizard flies around the sky in search of powerful opponents.",
     "imageUrl": "https://example.com/charizard.png",
     "weakness": "WATER",
-    "resistance": "GRASS"
+    "resistance": "GRASS",
+    "rarity": "COMMON",
+    "expansion": "JUNGLE"
   },
   {
     "type": "WATER",
@@ -17,7 +19,9 @@
     "description": "Blastoise has water spouts that protrude from its shell.",
     "imageUrl": "https://example.com/blastoise.png",
     "weakness": "ELECTRIC",
-    "resistance": "FIRE"
+    "resistance": "FIRE",
+    "rarity": "COMMON",
+    "expansion": "JUNGLE"
   },
   {
     "type": "GRASS",
@@ -27,7 +31,9 @@
     "description": "There is a large flower on Venusaur's back.",
     "imageUrl": "https://example.com/venusaur.png",
     "weakness": "FIRE",
-    "resistance": "WATER"
+    "resistance": "WATER",
+    "rarity": "UNCOMMON",
+    "expansion": "BASE"
   },
   {
     "type": "ELECTRIC",
@@ -37,7 +43,9 @@
     "description": "Pikachu can generate powerful electricity.",
     "imageUrl": "https://example.com/pikachu.png",
     "weakness": "GROUND",
-    "resistance": "FLYING"
+    "resistance": "FLYING",
+    "rarity": "RARE",
+    "expansion": "GYMHEROES"
   },
   {
     "type": "PSYCHIC",
@@ -47,7 +55,9 @@
     "description": "Mewtwo is a Pokémon that was created by genetic manipulation.",
     "imageUrl": "https://example.com/mewtwo.png",
     "weakness": "BUG",
-    "resistance": "FIGHTING"
+    "resistance": "FIGHTING",
+    "rarity": "RARE",
+    "expansion": "TEAMROCKET"
   },
   {
     "type": "NORMAL",
@@ -57,7 +67,9 @@
     "description": "Eevee has an unstable genetic makeup that suddenly mutates due to the environment in which it lives.",
     "imageUrl": "https://example.com/eevee.png",
     "weakness": "FIGHTING",
-    "resistance": "GHOST"
+    "resistance": "GHOST",
+    "rarity": "COMMON",
+    "expansion": "BASE"
   },
   {
     "type": "DRAGON",
@@ -67,7 +79,9 @@
     "description": "Dragonite is capable of circling the globe in just 16 hours.",
     "imageUrl": "https://example.com/dragonite.png",
     "weakness": "ICE",
-    "resistance": "FIRE"
+    "resistance": "FIRE",
+    "rarity": "RARE",
+    "expansion": "GYMCHALLENGE"
   },
   {
     "type": "BUG",
@@ -77,7 +91,9 @@
     "description": "Butterfree has a superior ability to search for delicious honey from flowers.",
     "imageUrl": "https://example.com/butterfree.png",
     "weakness": "FIRE",
-    "resistance": "GRASS"
+    "resistance": "GRASS",
+    "rarity": "UNCOMMON",
+    "expansion": "BASE"
   },
   {
     "type": "ROCK",
@@ -87,7 +103,9 @@
     "description": "Onix has a magnet in its brain. It acts as a compass so that this Pokémon does not lose direction while it is tunneling.",
     "imageUrl": "https://example.com/onix.png",
     "weakness": "WATER",
-    "resistance": "NORMAL"
+    "resistance": "NORMAL",
+    "rarity": "COMMON",
+    "expansion": "FOSSIL"
   },
   {
     "type": "GHOST",
@@ -97,6 +115,8 @@
     "description": "Gengar is said to emerge from darkness to steal the lives of those who become lost in mountains.",
     "imageUrl": "https://example.com/gengar.png",
     "weakness": "GHOST",
-    "resistance": "NORMAL"
+    "resistance": "NORMAL",
+    "rarity": "UNCOMMON",
+    "expansion": "TEAMROCKET"
   }
 ]

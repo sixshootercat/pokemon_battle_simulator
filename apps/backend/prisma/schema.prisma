@@ -25,6 +25,23 @@ model Pokemon {
   imageUrl    String?
   weakness    PokemonType
   resistance  PokemonType?
+  rarity      Rarity
+  expansion   Expansion
+}
+
+enum Expansion {
+  BASE
+  JUNGLE
+  FOSSIL
+  TEAMROCKET
+  GYMHEROES
+  GYMCHALLENGE
+}
+
+enum Rarity {
+  COMMON
+  UNCOMMON
+  RARE
 }
 
 enum PokemonType {
