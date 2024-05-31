@@ -5,6 +5,7 @@ import {
   IsString,
   IsEnum,
   IsOptional,
+  Min,
 } from 'class-validator';
 
 export class CreatePokemonDto
@@ -14,35 +15,31 @@ export class CreatePokemonDto
   @IsString()
   name: string;
 
-  @IsNotEmpty()
   @IsInt()
+  @Min(40)
   hp: number;
 
-  @IsNotEmpty()
   @IsInt()
+  @Min(20)
   attack: number;
 
-  @IsNotEmpty()
-  @IsEnum($Enums.PokemonType)
+  @IsEnum($Enums.PokemonType, { message: 'type must be a valid value' })
   type: $Enums.PokemonType;
 
   @IsNotEmpty()
   @IsString()
   description: string;
 
-  @IsNotEmpty()
-  @IsEnum($Enums.PokemonType)
+  @IsEnum($Enums.PokemonType, { message: 'weakness must be a valid value' })
   weakness: $Enums.PokemonType;
 
   @IsOptional()
   @IsEnum($Enums.PokemonType)
-  resistance: $Enums.PokemonType;
+  resistance?: $Enums.PokemonType;
 
-  @IsNotEmpty()
-  @IsEnum($Enums.Rarity)
+  @IsEnum($Enums.Rarity, { message: 'rarity must be a valid value' })
   rarity: $Enums.Rarity;
 
-  @IsNotEmpty()
-  @IsEnum($Enums.Expansion)
+  @IsEnum($Enums.Expansion, { message: 'expansion must be a valid value' })
   expansion: $Enums.Expansion;
 }
