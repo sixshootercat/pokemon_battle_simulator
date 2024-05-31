@@ -10,13 +10,20 @@ export type CreatePokemonRequestBody = Omit<
   "id" | "createdAt" | "updatedAt"
 >;
 
+export interface Meta {
+  count: number;
+  total: number;
+  left: string | null;
+  nextUrl: string | null;
+  prevUrl: string | null;
+}
+
 export interface GetAllPokemonResponse {
+  meta: Meta;
   pokemon: Pokemon[];
 }
 
-export interface GetSinglePokemonResponse {
-  pokemon: Pokemon;
-}
+export type GetSinglePokemonResponse = Pokemon;
 
 export interface GetAttackResultsResponse {
   successful: boolean;

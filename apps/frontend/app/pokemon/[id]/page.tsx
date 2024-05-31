@@ -1,7 +1,7 @@
 import { Pokemon } from "@/types/pokemon.types";
-import { PokemonCard } from "@/app/components/PokemonCard";
 import { BattleSimulator } from "./BattleSimulator";
 import { Metadata } from "next";
+import { GetAllPokemonResponse } from "@/types/requests.types";
 
 export const metadata: Metadata = {
   title: "Pokemon Battle Simulator | Battle ",
@@ -19,11 +19,14 @@ export default async function BattlePage({
     `${process.env.API_URL}/pokemon/${id}`
   ).then((res) => res.json());
 
-  const allPokemon: Pokemon[] = await fetch(`${process.env.API_URL}/pokemon`, {
-    cache: "no-cache",
-  }).then((res) => res.json());
+  const pokemonResp: GetAllPokemonResponse = await fetch(
+    `${process.env.API_URL}/pokemon`,
+    {
+      cache: "no-cache",
+    }
+  ).then((res) => res.json());
 
-  const filteredPokemon = allPokemon.filter((p) => p.id !== id);
+  const filteredPokemon = pokemonResp.pokemon.filter((p) => p.id !== id);
 
   return (
     <main className="flex justify-center items-center w-100 my-20 px-20">
