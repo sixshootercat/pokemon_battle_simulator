@@ -12,7 +12,6 @@ export const getPokemon = async ({
   offset?: string;
 }): Promise<GetAllPokemonResponse> => {
   if (url) {
-    console.log({ url });
     const resp = await fetch(url);
     const data = await resp.json();
 
