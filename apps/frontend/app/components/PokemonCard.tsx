@@ -13,7 +13,9 @@ export const PokemonCard = ({ pokemon }: PokemonProps) => {
       key={pokemon.id}
     >
       <div className="flex justify-between my-2 font-bold text-sm">
-        <h3 className="font-bold text-xl">{pokemon.name}</h3>
+        <h3 className="font-bold text-xl overflow-hidden overflow-ellipsis whitespace-nowrap">
+          {pokemon.name}
+        </h3>
         <div className="flex justify-center items-center gap-1">
           <div className="flex justify-center items-center bg-blue-500 text-white rounded-full h-8 w-8">
             <p className="text-sm">{pokemon.hp}</p>
