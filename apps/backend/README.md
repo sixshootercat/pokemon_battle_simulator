@@ -1,52 +1,47 @@
-## Installation
+## Install deps
 
 ```bash
-$ yarn install
+yarn install
 ```
 
-## Running the app
+## Running the dev server
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run dev
-
-# production mode
-$ yarn run start:prod
+yarn dev
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ yarn run test
+$ yarn test
 
 # e2e tests
-$ yarn run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ yarn run test:cov
+$ yarn test:cov
 ```
 
-## Optimizations and other Follw Up Considerations
+## Setup Environment Variables
+
+see `.env.EXAMPLE` file
+
+## DB and Prisma Setup
+
+1. Ensure you have a running instance of a Postgres DB.
+2. `npx prisma generate`
+3. `npx prisma migrate dev`. This will automatically seed the DB if no rows are found. If you prefer to manually seed, run `npx prisma db seed`.
+4. You may need to run `npx prisma generate client` to create the client ORM.
+5. With this you should be good to go.
+
+## Optimizations and other Follow Up Considerations
 
 1. Replace default Express server for Fastify for lower request latency.
 2. Replace default tsc compiler for SWC to boost compilation times.
-3. Add DB level check constraints to attack and hp cols.
-4. Add API docs to all endpoint routes.
-5. Standardize error responses and error handling into a service provider.
-6. Custom logger class
-7. Deploy the application to Vercel. Easiest way and most convenient.
-8. Add authentication and authorization to protect resources.
-9. Standardize response payload format under data key.
-10. Apply rate limiting to API routes
-
-## Assumptions Made
-
-- entity assumptions
-- validation assumptions
-- domain rule assumptions
-- resistance and weakness assumptions
-- more?
+3. Standardize error responses and error handling into a service provider.
+4. Custom logger class
+5. Deploy the application to Vercel. Easiest way and most convenient.
+6. Add authentication and authorization to protect resources.
+7. Standardize response payload format under data key.
+8. Apply rate limiting to API routes
