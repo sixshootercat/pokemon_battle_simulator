@@ -97,6 +97,11 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
     ...emptyFormFields,
   });
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    createPokemon();
+  };
+
   const createPokemon = async () => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/pokemon`;
 
@@ -107,6 +112,7 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
       };
     }, {} as any);
 
+    // transform the form fields to the correct format
     if (flattenedFormFields?.resistance) {
       flattenedFormFields.resistance = String(
         flattenedFormFields.resistance
@@ -134,6 +140,7 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
       flattenedFormFields.hp = Number(flattenedFormFields.hp);
     }
 
+    // send the request
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(flattenedFormFields),
@@ -180,7 +187,7 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
         }}
       >
         <div className="flex justify-between">
-          <form className=" w-full">
+          <form onSubmit={handleSubmit} className=" w-full">
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -419,8 +426,7 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
             <div className="flex items-center justify-between">
               <button
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
-                onClick={createPokemon}
+                type="submit"
               >
                 Create
               </button>
