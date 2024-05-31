@@ -1,12 +1,9 @@
 "use client";
-
 import { Dialog } from "@/app/components/Dialog";
 import { PokemonCard } from "@/app/components/PokemonCard";
+import { useGetBattleResults } from "@/app/hooks/useGetBattleResults";
+import { useGetEffectiveness } from "@/app/hooks/useGetEffectiveness";
 import { Pokemon } from "@/types/pokemon.types";
-import {
-  GetAttackResultsResponse,
-  GetWeaknessAndResistanceResponse,
-} from "@/types/requests.types";
 import { useState } from "react";
 
 interface BattleSimulatorProps {
@@ -21,41 +18,18 @@ export const BattleSimulator = ({
   const [selectedOpponent, setSelectedOpponent] = useState<Pokemon | null>(
     null
   );
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [respData, setRespData] = useState<GetAttackResultsResponse>();
-  const [weakAgainst, setWeakAgainst] = useState<Pokemon[]>([]);
-  const [resistantAgainst, setResistantAgainst] = useState<Pokemon[]>([]);
+  const battleResultsData = useGetBattleResults({
+    id: pokemon.id,
+    onComplete: () => setOpenResultsDialog(true),
+  });
+  const effectivenessData = useGetEffectiveness({
+    id: pokemon.id,
+    onComplete: () => setOpenEffectivenessDialog(true),
+  });
+
   const [openEffectivenessDialog, setOpenEffectivenessDialog] =
     useState<boolean>(false);
   const [openResultsDialog, setOpenResultsDialog] = useState<boolean>(false);
-
-  const getBattleResults = async () => {
-    if (!selectedOpponent) {
-      setErrorMessage("Please select an opponent to battle");
-      return;
-    }
-
-    setOpenResultsDialog(true);
-
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/pokemon/${pokemon.id}/attack/${selectedOpponent.id}`;
-
-    const resp = await fetch(url).then((res) => res.json());
-
-    setRespData(resp);
-    setErrorMessage(null);
-  };
-
-  const getEffectiveness = async () => {
-    setOpenEffectivenessDialog(true);
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/pokemon/weakness-resistance/${pokemon.id}`;
-
-    const resp: GetWeaknessAndResistanceResponse = await fetch(url).then(
-      (res) => res.json()
-    );
-
-    setWeakAgainst(resp.weakAgainst);
-    setResistantAgainst(resp.resistantAgainst);
-  };
 
   return (
     <main className="flex justify-center items-center gap-6">
@@ -95,17 +69,19 @@ export const BattleSimulator = ({
         </div>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={getBattleResults}
+          onClick={() =>
+            battleResultsData.getBattleResults(selectedOpponent?.id || "")
+          }
         >
           Battle
         </button>
-        {errorMessage && (
-          <p className="text-red-500 text-center">{errorMessage}</p>
+        {battleResultsData.error && (
+          <p className="text-red-500 text-center">{battleResultsData.error}</p>
         )}
         <div>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={getEffectiveness}
+            onClick={effectivenessData.getEffectiveness}
           >
             Check Weakness/Resistance
           </button>
@@ -113,8 +89,6 @@ export const BattleSimulator = ({
         <Dialog
           isOpen={openEffectivenessDialog}
           onRequestClose={() => {
-            setWeakAgainst([]);
-            setResistantAgainst([]);
             setOpenEffectivenessDialog(false);
           }}
         >
@@ -122,19 +96,21 @@ export const BattleSimulator = ({
             <div>
               <h3 className="text-lg font-bold">Weak Against:</h3>
               <ul>
-                {weakAgainst?.map((pokemon) => (
+                {effectivenessData?.data?.weakAgainst?.map((pokemon) => (
                   <li key={pokemon.id}>{pokemon.name}</li>
                 ))}
-                {weakAgainst?.length === 0 && <p className="italic">None</p>}
+                {effectivenessData?.data?.weakAgainst?.length === 0 && (
+                  <p className="italic">None</p>
+                )}
               </ul>
             </div>
             <div>
               <h3 className="text-lg font-bold">Resistant Against:</h3>
               <ul>
-                {resistantAgainst?.map((pokemon) => (
+                {effectivenessData?.data?.resistantAgainst?.map((pokemon) => (
                   <li key={pokemon.id}>{pokemon.name}</li>
                 ))}
-                {resistantAgainst?.length === 0 && (
+                {effectivenessData?.data?.resistantAgainst?.length === 0 && (
                   <p className="italic">None</p>
                 )}
               </ul>
@@ -150,7 +126,7 @@ export const BattleSimulator = ({
           <div className="flex flex-col justify-center items-center">
             <h3 className="text-lg font-bold">Battle results:</h3>
             <div className="mt-2">
-              {respData?.successful ? (
+              {battleResultsData.data?.successful ? (
                 <p className="px-4 py-2 bg-green-500 text-white text-lg rounded-full">
                   You defeated {selectedOpponent?.name}!
                 </p>
@@ -160,10 +136,11 @@ export const BattleSimulator = ({
                     Unable to defeat {selectedOpponent?.name}
                   </p>
                   <p className="text-md font-bold">
-                    Damage Dealt: {respData?.attackDamage} points
+                    Damage Dealt: {battleResultsData.data?.attackDamage} points
                   </p>
                   <p className="text-md font-bold">
-                    Opponent HP Remaining: {respData?.remainingHp} points
+                    Opponent HP Remaining: {battleResultsData.data?.remainingHp}{" "}
+                    points
                   </p>
                 </div>
               )}
