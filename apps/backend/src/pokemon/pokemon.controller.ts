@@ -22,6 +22,7 @@ import {
 import {
   CreatePokemonResponse,
   CreatePokemonRequestBody,
+  GetAttackResultsResponse,
 } from './pokemon.swagger';
 
 @ApiTags('pokemon')
@@ -43,15 +44,24 @@ export class PokemonController {
     return this.pokemonService.createPokemon(createPokemonDto);
   }
 
+  @ApiOperation({ summary: 'Get attack results' })
+  @ApiResponse({ status: 200 })
+  @ApiOkResponse({
+    // not sure why this is not generating docs in the swagger UI
+    type: GetAttackResultsResponse,
+  })
   @Get(':attackerId/attack/:defenderId')
-  async canDefeatInSingleAttack(
+  async getCanDefeatInSingleAttack(
     @Param('attackerId') attackerId: string,
     @Param('defenderId') defenderId: string,
   ) {
-    return this.pokemonService.canDefeatInSingleAttack(attackerId, defenderId);
+    return this.pokemonService.getCanDefeatInSingleAttack(
+      attackerId,
+      defenderId,
+    );
   }
 
-  @Get('effectiveness/:id')
+  @Get('weakness-resistance/:id')
   getPokemonWeaknessAndResistance(@Param('id') id: string) {
     return this.pokemonService.getPokemonWeaknessAndResistance(id);
   }

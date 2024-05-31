@@ -2,6 +2,17 @@ import { ApiProperty } from '@nestjs/swagger';
 import { $Enums } from '@prisma/client';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 
+export class GetAttackResultsResponse {
+  @ApiProperty({ example: 50 })
+  attackDamage: number;
+
+  @ApiProperty({ example: 20 })
+  remainingHp: number;
+
+  @ApiProperty({ example: true })
+  successful: boolean;
+}
+
 export class CreatePokemonRequestBody extends CreatePokemonDto {
   @ApiProperty({ example: 'Pikachu' })
   name: string;

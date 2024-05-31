@@ -45,7 +45,7 @@ export class PokemonService {
     }
   }
 
-  async canDefeatInSingleAttack(attackerId: string, defenderId: string) {
+  async getCanDefeatInSingleAttack(attackerId: string, defenderId: string) {
     const [attacker, defender] = await Promise.all([
       this.getSinglePokemon(attackerId),
       this.getSinglePokemon(defenderId),
@@ -75,7 +75,11 @@ export class PokemonService {
       damage -= 20;
     }
 
-    return { successful: damage >= defender.hp };
+    return {
+      successful: damage >= defender.hp,
+      attackDamage: damage,
+      remainingHp: defender.hp - damage,
+    };
   }
 
   async getAllPokemon() {
