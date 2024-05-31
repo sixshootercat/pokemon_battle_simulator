@@ -6,6 +6,7 @@ import {
   IsEnum,
   IsOptional,
   Min,
+  Max,
 } from 'class-validator';
 
 export class CreatePokemonDto
@@ -16,10 +17,12 @@ export class CreatePokemonDto
   name: string;
 
   @IsInt()
+  @Max(999)
   @Min(40)
   hp: number;
 
   @IsInt()
+  @Max(999)
   @Min(20)
   attack: number;
 

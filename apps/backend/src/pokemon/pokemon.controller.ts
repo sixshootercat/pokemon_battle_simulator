@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpCode,
+  Query,
 } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
@@ -67,8 +68,16 @@ export class PokemonController {
   }
 
   @Get()
-  getAllPokemon() {
-    return this.pokemonService.getAllPokemon();
+  getAllPokemon(
+    @Query() filter: { name?: string; limit?: string; offset?: string },
+  ) {
+    // parse limit and offset to numbers by creating a new object
+    const newFilter = {
+      ...filter,
+      limit: filter.limit ? parseInt(filter.limit) : undefined,
+      offset: filter.offset ? parseInt(filter.offset) : undefined,
+    };
+    return this.pokemonService.getAllPokemon(newFilter);
   }
 
   @Get(':id')

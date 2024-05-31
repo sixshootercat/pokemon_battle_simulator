@@ -82,8 +82,55 @@ export class PokemonService {
     };
   }
 
-  async getAllPokemon() {
-    return this.prisma.pokemon.findMany();
+  async getAllPokemon({
+    name,
+    limit,
+    offset,
+  }: {
+    name?: string;
+    limit?: number;
+    offset?: number;
+  }) {
+    const total = await this.prisma.pokemon.count({
+      where: {
+        name: name ? { contains: name, mode: 'insensitive' } : undefined,
+      },
+    });
+
+    const pokemon = await this.prisma.pokemon.findMany({
+      where: {
+        name: name ? { contains: name, mode: 'insensitive' } : undefined,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      take: limit || undefined,
+      skip: offset || undefined,
+    });
+
+    const nextOffset = offset + limit;
+    const prevOffset = offset - limit < 0 ? 0 : offset - limit;
+
+    const nextUrl =
+      nextOffset < total
+        ? `${process.env.BASE_URL}:${process.env.PORT}/v1/api/pokemon?limit=${limit}&offset=${nextOffset}`
+        : null;
+
+    const prevUrl =
+      offset > 0
+        ? `${process.env.BASE_URL}:${process.env.PORT}/v1/api/pokemon?limit=${limit}&offset=${prevOffset}`
+        : null;
+
+    return {
+      meta: {
+        total,
+        count: pokemon.length,
+        left: total - (offset + pokemon.length),
+        nextUrl,
+        prevUrl,
+      },
+      pokemon,
+    };
   }
 
   async getSinglePokemon(id: string) {
