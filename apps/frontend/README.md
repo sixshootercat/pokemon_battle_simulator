@@ -6,6 +6,8 @@ First, run the development server:
 yarn dev
 ```
 
+Application can be accessed at [http://localhost:3001](http://localhost:3001)
+
 ## Setup Environment Variables
 
 see `.env.EXAMPLE` and `.env.local.EXAMPLE` files
