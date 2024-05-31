@@ -48,7 +48,7 @@ export class PokemonController {
   @ApiOperation({ summary: 'Get attack results' })
   @ApiResponse({ status: 200 })
   @ApiOkResponse({
-    // not sure why this is not generating docs in the swagger UI
+    // TODO: Not sure why this is not generating docs in the swagger UI. It seems this is properly defined.
     type: GetAttackResultsResponse,
   })
   @Get(':attackerId/attack/:defenderId')
@@ -77,6 +77,7 @@ export class PokemonController {
       limit: filter.limit ? parseInt(filter.limit) : undefined,
       offset: filter.offset ? parseInt(filter.offset) : undefined,
     };
+
     return this.pokemonService.getAllPokemon(newFilter);
   }
 
