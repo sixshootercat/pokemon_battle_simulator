@@ -93,9 +93,11 @@ interface PokemonComposerProps {}
 export const PokemonComposer = ({}: PokemonComposerProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [formFields, setFormFields] = useState<FormFields>({
-    ...emptyFormFields,
-  });
+  const [formFields, setFormFields] = useState<FormFields>(
+    structuredClone(emptyFormFields)
+  );
+
+  console.log({ emptyFormFields, formFields });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -165,7 +167,7 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
       setFormFields(newFormFields);
     } else {
       await response.json();
-      setFormFields({ ...emptyFormFields });
+      setFormFields(structuredClone(emptyFormFields));
     }
   };
 
@@ -183,7 +185,7 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
         isOpen={isOpen}
         onRequestClose={() => {
           setIsOpen(false);
-          setFormFields({ ...emptyFormFields });
+          setFormFields(structuredClone(emptyFormFields));
         }}
       >
         <div className="flex justify-between">
