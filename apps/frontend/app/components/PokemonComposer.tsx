@@ -97,8 +97,6 @@ export const PokemonComposer = ({}: PokemonComposerProps) => {
     structuredClone(emptyFormFields)
   );
 
-  console.log({ emptyFormFields, formFields });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     createPokemon();
