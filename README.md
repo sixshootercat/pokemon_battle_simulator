@@ -49,9 +49,6 @@ NOTE: Make sure all the setup steps for both the frontend and backend apps where
 
 ## Assumptions Made
 
-- There were no instructions or steps to show the creation of a Pokemon card so I designed a half-decent one myself.
-- The Next.js app does not use a 3P fetching solution or server state management lib. It uses standard `fetch`.
-- I was uncertain how much use of 3P packages was expected to complete the challenge. Minimal deps were installed for the frontend app.
 - Pagination is offset based and the frontend sets it to 5 by default.
 - The DB is initially seeded with 10 pokemon records using Prisma.
 - The `imageUrl` field is set to `null` by default and there is not image upload when creating a card to simplify implementation.
